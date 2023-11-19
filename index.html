@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="WeatherIND.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Pixelify+Sans:wght@700&display=swap');
+      </style>
+    
+</head>
+<body>
+    <div class="cont">
+        <img src="night_sky.gif" alt="">
+    
+    <div class="main">
+    <fieldset style="height:375px;width: 80%;text-align: center;background-color:transparent"><legend style="color: rgb(125, 125, 126);font-size: 25px;font-family:'Orbitron', sans-serif;">
+    
+    <h1>GET WEATHER</h1></legend> <br><br>
+
+    <strong>Enter your City Name : </strong><input type="text" id="read"> <br><br><br>
+
+    <button onclick="weather()">Get Here</button> <br><br><br>
+
+    <p>Weather Report of : <span id="res"></span></p> <br>
+
+    <h4 id="txt"></h4>
+
+    <script>
+    function weather(){
+    let city = document.getElementById("read").value
+    let url = `https://goweather.herokuapp.com/weather/${city}`
+    let fetched_url = fetch(url)
+    fetched_url.then((resp)=>{
+        return resp.json()
+        
+    }).then((data)=>{
+        for(i in data){
+            document.getElementById("txt").innerHTML = `Temparature Forcast : ${data.temperature} <br> Wind-Speed : ${data.wind} <br> Description : ${data.description}`
+        
+            
+        }
+        console.log(data)
+        // document.writeln("Temparature forcast : ",data.temperature) 
+        // document.writeln("Wind forcast : ",data.wind)
+        
+    }).catch((err)=>{
+        console.log("something went worng : Network is not connected")
+        
+    })
+    document.getElementById("res").innerHTML = city;
+}
+
+</script></fieldset></div>
+    </div>
+</body>
+</html>
